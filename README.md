@@ -377,7 +377,52 @@ Questo approccio garantisce che ciascun test inizi con una connessione aperta e 
 
 
 
+_________________________________________________
 
+
+L'annotazione `@AfterAll` in JUnit 5 indica che un metodo statico deve essere eseguito una sola volta dopo l'esecuzione di tutti i test nella classe. Questo è utile quando hai bisogno di effettuare operazioni di pulizia o rilascio di risorse una volta completati tutti i test. Ecco un esempio di come utilizzare `@AfterAll`:
+
+Supponiamo di avere una classe `ResourceHandler` che gestisce una risorsa globale e vogliamo assicurarci di rilasciare questa risorsa una volta completati tutti i test.
+
+```java
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class ResourceHandlerTest {
+
+    private static ResourceHandler resourceHandler;
+    private static boolean resourceInitialized;
+
+    @BeforeAll
+    static void setUpBeforeClass() {
+        // Inizializziamo la risorsa una sola volta prima di tutti i test
+        resourceHandler = new ResourceHandler();
+        resourceInitialized = resourceHandler.initializeResource();
+    }
+
+    @Test
+    void testOperazioneRisorsa() {
+        // Test per eseguire un'operazione sulla risorsa
+        boolean operazioneRiuscita = resourceHandler.performResourceOperation();
+        assertEquals(true, operazioneRiuscita);
+    }
+
+    @AfterAll
+    static void tearDownAfterClass() {
+        // Rilasciamo la risorsa dopo tutti i test
+        if (resourceInitialized) {
+            resourceHandler.releaseResource();
+            resourceInitialized = false;
+        }
+    }
+}
+```
+
+In questo esempio, utilizziamo `@BeforeAll` per garantire che la risorsa venga inizializzata una sola volta prima dell'esecuzione di tutti i test. Utilizziamo `@AfterAll` per rilasciare la risorsa dopo che tutti i test sono stati eseguiti.
+
+Questo approccio è utile quando hai bisogno di risorse globali per l'intera classe di test e desideri garantire che queste risorse vengano correttamente inizializzate prima dei test e rilasciate alla fine. L'uso di `@AfterAll` è particolarmente utile quando si tratta di risorse come connessioni al database o file temporanei che devono essere puliti quando tutti i test sono stati eseguiti.
 
 
 
