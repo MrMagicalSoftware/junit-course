@@ -233,6 +233,7 @@ Supponiamo di avere una classe `Calcolatrice` con un metodo `somma` che vogliamo
 ```
 import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.function.Executable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Arrays;
 import java.util.Collection;
@@ -253,12 +254,15 @@ public class CalcolatriceTest {
     }
 
     private DynamicTest dynamicTest(String nome, int a, int b, int risultatoAspettato) {
-        return DynamicTest.dynamicTest(nome, () -> {
+        Executable eseguiTest = () -> {
             int risultato = calcolatrice.somma(a, b);
             assertEquals(risultatoAspettato, risultato);
-        });
+        };
+
+        return DynamicTest.dynamicTest(nome, eseguiTest);
     }
 }
+
 ```
 
 In questo esempio, stiamo usando `@TestFactory` per creare dinamicamente una collezione di test. La collezione contiene una serie di test dinamici definiti nella funzione `testSomma`. Ogni test dinamico è creato chiamando il metodo `dynamicTest`, che prende il nome del test e una lambda che contiene il codice effettivo del test.
