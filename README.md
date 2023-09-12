@@ -583,6 +583,72 @@ Il test `testEsecuzioneLenta`, d'altra parte, supererà il limite di tempo speci
 L'uso di `@Timeout` è utile per garantire che i tuoi test non rimangano bloccati e per individuare eventuali problemi di performance nel tuo codice. Puoi regolare il limite di tempo in base alle esigenze del tuo test.
 
 
+____________________________________________
+
+
+## ExtendWith 
+
+
+
+L'annotazione `@ExtendWith` in JUnit 5 consente di estendere il comportamento del framework di test. Puoi utilizzare `@ExtendWith` per collegare estensioni personalizzate a livello di classe o metodo. Ecco un esempio di come utilizzare `@ExtendWith` con un'estensione personalizzata:
+
+Supponiamo di avere una classe di test `CalculatorTest` e vogliamo utilizzare un'**estensione personalizzata** chiamata `CustomExtension` per effettuare operazioni personalizzate prima e dopo l'esecuzione dei test.
+
+```java
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(CustomExtension.class)
+public class CalculatorTest {
+
+    @Test
+    void testAddition() {
+        Calculator calculator = new Calculator();
+        int result = calculator.add(3, 5);
+        assertEquals(8, result);
+    }
+
+    @Test
+    void testSubtraction() {
+        Calculator calculator = new Calculator();
+        int result = calculator.subtract(10, 3);
+        assertEquals(7, result);
+    }
+}
+```
+
+In questo esempio, abbiamo contrassegnato la classe `CalculatorTest` con `@ExtendWith(CustomExtension.class)`, indicando che vogliamo utilizzare l'estensione personalizzata `CustomExtension` con questa classe di test.
+
+Ora creiamo l'estensione personalizzata `CustomExtension`. Per farlo, creiamo una classe che implementi l'interfaccia `Extension` di JUnit 5 e sovrascriviamo i metodi necessari, come `beforeEach` e `afterEach`, per eseguire operazioni personalizzate prima e dopo ogni test. Ecco un esempio:
+
+```java
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
+import org.junit.jupiter.api.extension.ExtensionContext.Store;
+
+public class CustomExtension implements BeforeEachCallback {
+
+    @Override
+    public void beforeEach(ExtensionContext context) throws Exception {
+        // Operazioni personalizzate da eseguire prima di ogni test
+        String testName = context.getRequiredTestMethod().getName();
+        System.out.println("Esecuzione di " + testName);
+        
+        // Puoi anche archiviare dati condivisi tra i test nel contesto
+        Store store = context.getStore(Namespace.create(getClass(), testName));
+        store.put("chiave", "valore");
+    }
+}
+```
+
+In questa estensione personalizzata, stiamo semplicemente stampando il nome del test prima dell'esecuzione di ciascun test e mettendo un dato condiviso nel contesto dell'estensione. Puoi personalizzare l'estensione per eseguire le operazioni desiderate prima o dopo i test in base alle tue esigenze.
+
+L'uso di `@ExtendWith` e delle estensioni personalizzate è utile per aggiungere comportamenti personalizzati ai tuoi test o per configurare ambienti di test specifici.
+
+
+
+
 
 
 
