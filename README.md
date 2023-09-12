@@ -483,7 +483,58 @@ In questo esempio, abbiamo una classe `CalculatorTest` con due classi nidificate
 L'uso di classi nidificate aiuta a organizzare i test in modo più chiaro e a mantenere una struttura gerarchica logica. Questo è particolarmente utile quando si hanno molte suite di test e si desidera separare concetti e comportamenti specifici in classi di test indipendenti.
 
 
+__________________________________________
 
+
+
+L'annotazione `@Tag` in JUnit 5 consente di contrassegnare i test con etichette (tag) per classificarli in base a determinati criteri. Questo è utile per eseguire o escludere gruppi specifici di test in base alle loro etichette o per applicare filtri ai test in base alle etichette durante l'esecuzione. Ecco un esempio di come utilizzare `@Tag`:
+
+Supponiamo di avere una classe `Calculator` che vogliamo testare e vogliamo contrassegnare alcuni test come "operazioni di base" e altri come "operazioni avanzate":
+
+```java
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorTest {
+
+    @Test
+    @Tag("basic")
+    void testAddition() {
+        Calculator calculator = new Calculator();
+        int result = calculator.add(3, 5);
+        assertEquals(8, result);
+    }
+
+    @Test
+    @Tag("basic")
+    void testSubtraction() {
+        Calculator calculator = new Calculator();
+        int result = calculator.subtract(10, 3);
+        assertEquals(7, result);
+    }
+
+    @Test
+    @Tag("advanced")
+    void testMultiplication() {
+        Calculator calculator = new Calculator();
+        int result = calculator.multiply(4, 6);
+        assertEquals(24, result);
+    }
+
+    @Test
+    @Tag("advanced")
+    void testDivision() {
+        Calculator calculator = new Calculator();
+        double result = calculator.divide(20, 4);
+        assertEquals(5.0, result, 0.0001);
+    }
+}
+```
+
+In questo esempio, abbiamo utilizzato `@Tag` per contrassegnare i test con etichette "basic" e "advanced". I test di addizione e sottrazione sono contrassegnati come "basic", mentre i test di moltiplicazione e divisione sono contrassegnati come "advanced".
+
+Puoi ora utilizzare queste etichette per eseguire o escludere gruppi specifici di test utilizzando i filtri durante l'esecuzione dei test. Ad esempio, puoi eseguire solo i test contrassegnati come "basic" o "advanced" secondo le tue esigenze.
 
 
 
