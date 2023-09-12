@@ -425,7 +425,62 @@ In questo esempio, utilizziamo `@BeforeAll` per garantire che la risorsa venga i
 Questo approccio è utile quando hai bisogno di risorse globali per l'intera classe di test e desideri garantire che queste risorse vengano correttamente inizializzate prima dei test e rilasciate alla fine. L'uso di `@AfterAll` è particolarmente utile quando si tratta di risorse come connessioni al database o file temporanei che devono essere puliti quando tutti i test sono stati eseguiti.
 
 
+_______________________________
 
+## NESTED
+
+L'annotazione `@Nested` in JUnit 5 permette di creare classi di test nidificate all'interno di una classe di test principale. Questo è utile per organizzare i test in una struttura gerarchica e separare i test correlati in classi nidificate. Ecco un esempio di come utilizzare `@Nested`:
+
+Supponiamo di avere una classe `Calculator` che vogliamo testare. Possiamo organizzare i test in classi nidificate per coprire diversi aspetti della calcolatrice, come l'addizione e la sottrazione:
+
+```java
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorTest {
+
+    @Nested
+    class AddTest {
+
+        @Test
+        void testAdditionPositiveNumbers() {
+            Calculator calculator = new Calculator();
+            int result = calculator.add(3, 5);
+            assertEquals(8, result);
+        }
+
+        @Test
+        void testAdditionNegativeNumbers() {
+            Calculator calculator = new Calculator();
+            int result = calculator.add(-3, -5);
+            assertEquals(-8, result);
+        }
+    }
+
+    @Nested
+    class SubtractTest {
+
+        @Test
+        void testSubtractionPositiveNumbers() {
+            Calculator calculator = new Calculator();
+            int result = calculator.subtract(10, 3);
+            assertEquals(7, result);
+        }
+
+        @Test
+        void testSubtractionNegativeNumbers() {
+            Calculator calculator = new Calculator();
+            int result = calculator.subtract(-10, -3);
+            assertEquals(-7, result);
+        }
+    }
+}
+```
+
+In questo esempio, abbiamo una classe `CalculatorTest` con due classi nidificate: `AddTest` e `SubtractTest`. Ogni classe nidificata contiene una serie di test relativi all'addizione o alla sottrazione, rispettivamente.
+
+L'uso di classi nidificate aiuta a organizzare i test in modo più chiaro e a mantenere una struttura gerarchica logica. Questo è particolarmente utile quando si hanno molte suite di test e si desidera separare concetti e comportamenti specifici in classi di test indipendenti.
 
 
 
