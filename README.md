@@ -174,6 +174,49 @@ In questo esempio, abbiamo utilizzato `@ParameterizedTest` in combinazione con `
 Il formato `@CsvSource` consente di definire facilmente molteplici casi di test fornendo input e risultati attesi in un formato tabellare. Puoi anche utilizzare altre sorgenti di parametri come `@MethodSource` o `@ValueSource` in base alle tue esigenze specifiche.
 
 
+_______________________________________________________________________
+
+
+
+## RepeatedTest
+
+
+
+L'annotazione @RepeatedTest in JUnit 5 ti permette di eseguire lo stesso test un numero specifico di volte. Questo può essere utile per verificare la stabilità e la ripetibilità di un test, soprattutto quando stai cercando di identificare problemi sporadici o di testare la robustezza del tuo codice. Ecco un esempio di come utilizzare @RepeatedTest:
+
+Supponiamo di avere un metodo eseguiOperazioneCostosa che vogliamo testare 10 volte.
+
+import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.TestInstance;
+import static org.junit.jupiter.api.TestInstance.Lifecycle;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@TestInstance(Lifecycle.PER_CLASS)
+public class OperazioneCostosaTest {
+
+    private int numeroEsecuzioni = 0;
+
+    @RepeatedTest(10)
+    void testEsecuzioneRipetuta() {
+        numeroEsecuzioni++;
+        System.out.println("Esecuzione #" + numeroEsecuzioni);
+        boolean risultato = eseguiOperazioneCostosa();
+        assertTrue(risultato);
+    }
+
+    private boolean eseguiOperazioneCostosa() {
+        // Simuliamo un'operazione costosa
+        return true;
+    }
+}
+
+
+In questo esempio, stiamo testando il metodo eseguiOperazioneCostosa 10 volte utilizzando @RepeatedTest(10). La variabile numeroEsecuzioni tiene traccia del numero di esecuzioni, e il test verifica che il risultato di eseguiOperazioneCostosa sia sempre true.
+
+L'annotazione @TestInstance(Lifecycle.PER_CLASS) è stata utilizzata per dichiarare che la classe di test mantiene una singola istanza per l'intera classe, consentendo così di mantenere lo stato tra le esecuzioni ripetute. Inoltre, @RepeatedTest può essere utilizzato anche con altri parametri, come name per dare un nome specifico al test ripetuto o displayName per personalizzare il nome visualizzato nel report di test.
+
+
+
 
 
 
