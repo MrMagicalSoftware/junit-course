@@ -319,6 +319,70 @@ Utilizzando `@BeforeEach`, è possibile garantire che i test siano ripetibili e 
 
 
 
+_____________________________________________
+
+
+## AfterEach
+
+L'annotazione `@AfterEach` in JUnit 5 indica che un metodo deve essere eseguito dopo ciascun test nella classe. Questo è utile per effettuare operazioni di pulizia o rilascio di risorse dopo l'esecuzione di ciascun test, garantendo che ogni test non lasci alcun impatto sugli altri. Ecco un esempio di come utilizzare `@AfterEach`:
+
+Supponiamo di avere una classe `DatabaseManager` che gestisce una connessione al database e vogliamo assicurarci di chiudere la connessione dopo ciascun test.
+
+```java
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class DatabaseManagerTest {
+
+    private DatabaseManager databaseManager;
+    private boolean databaseConnected;
+
+    @BeforeEach
+    void setUp() {
+        // Inizializziamo il database manager e apriamo la connessione prima di ogni test
+        databaseManager = new DatabaseManager();
+        databaseConnected = databaseManager.connectToDatabase();
+    }
+
+    @Test
+    void testInserimentoDati() {
+        // Test per inserire dati nel database
+        boolean inserimentoRiuscito = databaseManager.inserisciDati("dati di prova");
+        assertEquals(true, inserimentoRiuscito);
+    }
+
+    @Test
+    void testLetturaDati() {
+        // Test per leggere dati dal database
+        String datiLetti = databaseManager.leggiDati();
+        assertEquals("dati di prova", datiLetti);
+    }
+
+    @AfterEach
+    void tearDown() {
+        // Chiudiamo la connessione al database dopo ogni test
+        if (databaseConnected) {
+            databaseManager.disconnectFromDatabase();
+            databaseConnected = false;
+        }
+    }
+}
+```
+
+In questo esempio, utilizziamo `@AfterEach` per garantire che la connessione al database venga chiusa dopo l'esecuzione di ciascun test. Il metodo `tearDown` viene eseguito dopo ogni test e verifica se la connessione è aperta; se lo è, chiude la connessione.
+
+Questo approccio garantisce che ciascun test inizi con una connessione aperta e termini con una connessione chiusa, evitando così che i test influiscano l'uno sull'altro o lascino la connessione aperta accidentalmente.
+
+
+
+
+
+
+
+
+
 
 
 
