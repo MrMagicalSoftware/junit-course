@@ -24,7 +24,7 @@ void testAddition() {
 }
 ```
 
-BeforeEach: Questo tag viene utilizzato per annotare i metodi che devono essere eseguiti prima di ogni test. Viene spesso utilizzato per inizializzare alcuni oggetti o variabili necessarie per eseguire i test.
+**BeforeEach**: Questo tag viene utilizzato per annotare i metodi che devono essere eseguiti prima di ogni test. Viene spesso utilizzato per inizializzare alcuni oggetti o variabili necessarie per eseguire i test.
 
 Esempio:
 
@@ -38,7 +38,7 @@ void setup() {
 ```
 
 
-@AfterEach: Questo tag viene utilizzato per annotare i metodi che devono essere eseguiti dopo ogni test. Viene spesso utilizzato per eseguire ripristini o pulizie dopo aver completato un test.
+**AfterEach**: Questo tag viene utilizzato per annotare i metodi che devono essere eseguiti dopo ogni test. Viene spesso utilizzato per eseguire ripristini o pulizie dopo aver completato un test.
 
 Esempio:
 ```
@@ -49,7 +49,9 @@ void tearDown() {
    calculator = null;
 }
 ```
-@DisplayName: Questo tag viene utilizzato per fornire un nome personalizzato per il test nel report dei test. Può essere utile per descrivere in modo più chiaro l'obiettivo del test.
+
+
+**DisplayName**: Questo tag viene utilizzato per fornire un nome personalizzato per il test nel report dei test. Può essere utile per descrivere in modo più chiaro l'obiettivo del test.
 
 Esempio:
 
