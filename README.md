@@ -95,3 +95,21 @@ _______________________________________________________
 
 
 
+____________________________________________
+
+
+## BeforeAll
+
+L'annotazione @BeforeAll in JUnit 5 indica che un metodo statico deve essere eseguito una sola volta prima di tutti i test nella classe. È utile quando hai bisogno di inizializzare dati o risorse globali che sono comuni a tutti i test della classe. Ecco un esempio di come utilizzare @BeforeAll:
+
+
+
+
+
+
+
+
+
+
+
+
