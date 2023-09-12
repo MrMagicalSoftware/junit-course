@@ -136,8 +136,42 @@ In questo esempio, abbiamo una classe di test CalcolatriceTest che testa i metod
 Questo approccio è utile quando hai risorse costose da inizializzare, come connessioni al database o oggetti complessi, che possono essere condivisi tra i tuoi test. Assicurati che il metodo annotato con @BeforeAll sia statico e che le risorse inizializzate siano dichiarate come variabili statiche, in modo che possano essere condivise tra tutti i test senza la necessità di reinizializzarle per ciascun test.
 
 
+_____________________
+
+## ParameterizedTest
 
 
+L'annotazione `@ParameterizedTest` in JUnit 5 ti permette di eseguire lo stesso test con diversi set di dati di input. Questo è particolarmente utile quando vuoi eseguire un test su molte combinazioni di dati per verificare che la tua logica funzioni correttamente. Ecco un esempio di come utilizzare `@ParameterizedTest`:
+
+Supponiamo di avere una classe `Calcolatrice` con un metodo `somma` che vogliamo testare con input diversi.
+
+```
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalcolatriceTest {
+
+    private Calcolatrice calcolatrice = new Calcolatrice();
+
+    @ParameterizedTest
+    @CsvSource({
+        "2, 3, 5",
+        "0, 0, 0",
+        "-1, 1, 0",
+        "-2, -3, -5"
+    })
+    void testSomma(int a, int b, int risultatoAspettato) {
+        int risultato = calcolatrice.somma(a, b);
+        assertEquals(risultatoAspettato, risultato);
+    }
+}
+```
+
+In questo esempio, abbiamo utilizzato `@ParameterizedTest` in combinazione con `@CsvSource` per specificare diversi set di input e i risultati attesi. Il test `testSomma` verrà eseguito quattro volte, una volta per ciascun set di input specificato nella `@CsvSource`. Il test verifica che il risultato della somma ottenuto dal metodo `calcolatrice.somma` corrisponda al risultato aspettato.
+
+Il formato `@CsvSource` consente di definire facilmente molteplici casi di test fornendo input e risultati attesi in un formato tabellare. Puoi anche utilizzare altre sorgenti di parametri come `@MethodSource` o `@ValueSource` in base alle tue esigenze specifiche.
 
 
 
