@@ -536,7 +536,51 @@ In questo esempio, abbiamo utilizzato `@Tag` per contrassegnare i test con etich
 
 Puoi ora utilizzare queste etichette per eseguire o escludere gruppi specifici di test utilizzando i filtri durante l'esecuzione dei test. Ad esempio, puoi eseguire solo i test contrassegnati come "basic" o "advanced" secondo le tue esigenze.
 
+______________________________
 
+L'annotazione `@Timeout` in JUnit 5 consente di definire un limite di tempo massimo per l'esecuzione di un test. Se un test supera il limite di tempo specificato, verrà segnalato come fallito. Questo è utile per garantire che i tuoi test non rimangano bloccati indefinitamente e per individuare potenziali problemi di prestazioni o di sincronizzazione nel tuo codice. Ecco un esempio di come utilizzare `@Timeout`:
+
+```java
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+
+public class TimeoutExample {
+
+    @Test
+    @Timeout(2) // Limite di tempo di 2 secondi
+    void testEsecuzioneRapida() {
+        // Simuliamo un'operazione che dovrebbe essere eseguita in meno di 2 secondi
+        doSomethingQuick();
+    }
+
+    @Test
+    @Timeout(5) // Limite di tempo di 5 secondi
+    void testEsecuzioneLenta() {
+        // Simuliamo un'operazione che richiede più di 5 secondi
+        doSomethingSlow();
+    }
+
+    private void doSomethingQuick() {
+        // Operazione rapida
+    }
+
+    private void doSomethingSlow() {
+        try {
+            Thread.sleep(6000); // Simuliamo un'operazione lenta di 6 secondi
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+In questo esempio, abbiamo due test: `testEsecuzioneRapida` e `testEsecuzioneLenta`. Il primo test ha un limite di tempo di 2 secondi, il secondo di 5 secondi.
+
+Il test `testEsecuzioneRapida` eseguirà con successo poiché `doSomethingQuick` è un'operazione rapida che completa entro il limite di tempo specificato.
+
+Il test `testEsecuzioneLenta`, d'altra parte, supererà il limite di tempo specificato poiché `doSomethingSlow` è un'operazione lenta che richiede più di 5 secondi per essere completata. In questo caso, il test verrà segnalato come fallito.
+
+L'uso di `@Timeout` è utile per garantire che i tuoi test non rimangano bloccati e per individuare eventuali problemi di performance nel tuo codice. Puoi regolare il limite di tempo in base alle esigenze del tuo test.
 
 
 
