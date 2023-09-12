@@ -102,6 +102,39 @@ ____________________________________________
 
 L'annotazione @BeforeAll in JUnit 5 indica che un metodo statico deve essere eseguito una sola volta prima di tutti i test nella classe. È utile quando hai bisogno di inizializzare dati o risorse globali che sono comuni a tutti i test della classe. Ecco un esempio di come utilizzare @BeforeAll:
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalcolatriceTest {
+
+    private static Calcolatrice calcolatrice;
+
+    @BeforeAll
+    static void setUpBeforeClass() {
+        // Inizializzazione della calcolatrice una sola volta
+        calcolatrice = new Calcolatrice();
+        System.out.println("Inizializzazione della calcolatrice");
+    }
+
+    @Test
+    void testSomma() {
+        int risultato = calcolatrice.somma(3, 5);
+        assertEquals(8, risultato);
+    }
+
+    @Test
+    void testSottrazione() {
+        int risultato = calcolatrice.sottrazione(10, 4);
+        assertEquals(6, risultato);
+    }
+}
+
+
+In questo esempio, abbiamo una classe di test CalcolatriceTest che testa i metodi di una classe Calcolatrice. L'annotazione @BeforeAll è utilizzata per inizializzare l'istanza della calcolatrice calcolatrice prima dell'esecuzione di qualsiasi test. Questo metodo verrà eseguito una sola volta all'inizio, prima di qualsiasi test all'interno della classe di test.
+
+Questo approccio è utile quando hai risorse costose da inizializzare, come connessioni al database o oggetti complessi, che possono essere condivisi tra i tuoi test. Assicurati che il metodo annotato con @BeforeAll sia statico e che le risorse inizializzate siano dichiarate come variabili statiche, in modo che possano essere condivise tra tutti i test senza la necessità di reinizializzarle per ciascun test.
+
 
 
 
