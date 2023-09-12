@@ -68,10 +68,11 @@ void testAddition() {
 _______________________________________________________
 
 
-| Annotation	 | #Description    | 
+| Annotation	 | Description    | 
 | :---:   | :---: |
-| Seconds | 301   |
+| @Test   | Denotes that a method is a test method. Unlike JUnit 4’s @Test annotation, this annotation does not declare any attributes, since test extensions in JUnit Jupiter operate based on their own dedicated annotations. Such methods are inherited unless they are overridden.|
 
+| @ParameterizedTest| Denotes that a method is a parameterized test. Such methods are inherited unless they are overridden.|
 
 
 
