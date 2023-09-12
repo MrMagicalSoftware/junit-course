@@ -216,7 +216,54 @@ In questo esempio, stiamo testando il metodo eseguiOperazioneCostosa 10 volte ut
 L'annotazione @TestInstance(Lifecycle.PER_CLASS) è stata utilizzata per dichiarare che la classe di test mantiene una singola istanza per l'intera classe, consentendo così di mantenere lo stato tra le esecuzioni ripetute. Inoltre, @RepeatedTest può essere utilizzato anche con altri parametri, come name per dare un nome specifico al test ripetuto o displayName per personalizzare il nome visualizzato nel report di test.
 
 
+_______________________________________
 
+
+
+
+
+
+
+
+
+L'annotazione `@TestFactory` in JUnit 5 consente di creare test in modo dinamico al momento dell'esecuzione. È utile quando il numero o la configurazione dei test dipende da dati o logica complessa. Ecco un esempio di come utilizzare `@TestFactory`:
+
+Supponiamo di avere una classe `Calcolatrice` con un metodo `somma` che vogliamo testare con diverse combinazioni di input.
+
+```
+import org.junit.jupiter.api.TestFactory;
+import org.junit.jupiter.api.DynamicTest;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Stream;
+
+public class CalcolatriceTest {
+
+    private Calcolatrice calcolatrice = new Calcolatrice();
+
+    @TestFactory
+    Collection<DynamicTest> testSomma() {
+        return Arrays.asList(
+            dynamicTest("Test somma positiva", 2, 3, 5),
+            dynamicTest("Test somma zero", 0, 0, 0),
+            dynamicTest("Test somma negativa", -1, 1, 0),
+            dynamicTest("Test somma negativa con negativo", -2, -3, -5)
+        );
+    }
+
+    private DynamicTest dynamicTest(String nome, int a, int b, int risultatoAspettato) {
+        return DynamicTest.dynamicTest(nome, () -> {
+            int risultato = calcolatrice.somma(a, b);
+            assertEquals(risultatoAspettato, risultato);
+        });
+    }
+}
+```
+
+In questo esempio, stiamo usando `@TestFactory` per creare dinamicamente una collezione di test. La collezione contiene una serie di test dinamici definiti nella funzione `testSomma`. Ogni test dinamico è creato chiamando il metodo `dynamicTest`, che prende il nome del test e una lambda che contiene il codice effettivo del test.
+
+I test dinamici vengono eseguiti e il risultato viene riportato nel report dei test. Questo approccio è utile quando hai bisogno di testare una serie di casi di test simili con dati diversi, in modo da evitare la duplicazione del codice di test e rendere il tuo codice più leggibile ed estensibile.
 
 
 
