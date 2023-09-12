@@ -647,6 +647,62 @@ In questa estensione personalizzata, stiamo semplicemente stampando il nome del 
 L'uso di `@ExtendWith` e delle estensioni personalizzate è utile per aggiungere comportamenti personalizzati ai tuoi test o per configurare ambienti di test specifici.
 
 
+____________________________
+
+
+
+L'annotazione `@TempDir` in JUnit 5 è utilizzata per ottenere una directory temporanea per l'uso nei tuoi test. Questo è utile quando devi scrivere o leggere file temporanei durante l'esecuzione dei test senza dover preoccuparti di pulire o gestire manualmente la directory temporanea. Ecco un esempio di come utilizzare `@TempDir`:
+
+```java
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class TempDirExample {
+
+    @Test
+    void testReadWriteWithTempDir(@TempDir Path tempDir) throws IOException {
+        // Ogni test riceve una directory temporanea unica
+
+        // Verifica che la directory temporanea sia stata creata
+        assertTrue(Files.exists(tempDir));
+
+        // Scrivi un file temporaneo nella directory
+        Path tempFile = tempDir.resolve("tempFile.txt");
+        Files.write(tempFile, "Contenuto del file temporaneo".getBytes(), StandardOpenOption.CREATE);
+
+        // Verifica che il file sia stato creato
+        assertTrue(Files.exists(tempFile));
+
+        // Leggi il contenuto del file temporaneo
+        String content = Files.readString(tempFile);
+
+        // Verifica il contenuto del file
+        assertTrue(content.contains("Contenuto del file temporaneo"));
+    }
+}
+```
+
+In questo esempio, abbiamo contrassegnato il parametro `@TempDir` del metodo di test `testReadWriteWithTempDir` con l'annotazione `@TempDir`. JUnit 5 fornirà automaticamente una directory temporanea unica come valore per questo parametro quando il test viene eseguito.
+
+All'interno del test, verifichiamo che la directory temporanea esista, creiamo un file temporaneo all'interno di essa, verifichiamo che il file sia stato creato e leggiamo il contenuto del file temporaneo. L'utilizzo di `@TempDir` semplifica la gestione delle directory temporanee nei tuoi test e rende il tuo codice più pulito e manutenibile.
+
+
+
+
+
+
+
+
+
 
 
 
