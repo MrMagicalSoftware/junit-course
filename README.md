@@ -25,28 +25,32 @@ void testAddition() {
 
 Esempio:
 
+```
 @BeforeEach
 void setup() {
    // Inizializza gli oggetti o le variabili necessarie per i test
    // ad esempio, creazione di istanze di oggetti o inizializzazione di variabili
    calculator = new Calculator();
 }
+```
 
-    @AfterEach: Questo tag viene utilizzato per annotare i metodi che devono essere eseguiti dopo ogni test. Viene spesso utilizzato per eseguire ripristini o pulizie dopo aver completato un test.
+
+@AfterEach: Questo tag viene utilizzato per annotare i metodi che devono essere eseguiti dopo ogni test. Viene spesso utilizzato per eseguire ripristini o pulizie dopo aver completato un test.
 
 Esempio:
-
+```
 @AfterEach
 void tearDown() {
    // Esegui ripristini o pulizie dopo aver completato un test
    // ad esempio, deallocazione di risorse o pulizia di dati
    calculator = null;
 }
-
-    @DisplayName: Questo tag viene utilizzato per fornire un nome personalizzato per il test nel report dei test. Può essere utile per descrivere in modo più chiaro l'obiettivo del test.
+```
+@DisplayName: Questo tag viene utilizzato per fornire un nome personalizzato per il test nel report dei test. Può essere utile per descrivere in modo più chiaro l'obiettivo del test.
 
 Esempio:
 
+```
 @Test
 @DisplayName("Test addizione")
 void testAddition() {
@@ -54,5 +58,5 @@ void testAddition() {
    int result = calculator.add(2, 3);
    assertEquals(5, result);
 }
-
+```
 Questi sono solo alcuni dei principali tag disponibili in JUnit 5. Ci sono anche altri tag come @BeforeAll, @AfterAll, @Disabled, @ParameterizedTest, ecc. che possono essere utilizzati per diversi scopi durante la scrittura dei test.
