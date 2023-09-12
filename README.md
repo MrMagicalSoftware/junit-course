@@ -271,6 +271,59 @@ I test dinamici vengono eseguiti e il risultato viene riportato nel report dei t
 
 
 
+___________________________
+
+
+## BeforeEach
+
+L'annotazione `@BeforeEach` in JUnit 5 indica che un metodo deve essere eseguito prima di ciascun test nella classe. Questo è utile quando hai bisogno di inizializzare dati o risorse comuni a tutti i test, garantendo che ogni test parta da uno stato coerente. Ecco un esempio di come utilizzare `@BeforeEach`:
+
+Supponiamo di avere una classe `Account` con un metodo `preleva` che vogliamo testare. Prima di ogni test, vogliamo creare un nuovo account e depositare un ammontare iniziale.
+
+```java
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class AccountTest {
+
+    private Account account;
+
+    @BeforeEach
+    void setUp() {
+        // Inizializziamo un nuovo account prima di ogni test
+        account = new Account("12345", 1000); // Numero dell'account e saldo iniziale
+    }
+
+    @Test
+    void testPrelevaConSaldoSufficiente() {
+        boolean prelievoRiuscito = account.preleva(500);
+        assertEquals(500, account.getSaldo());
+        assertEquals(true, prelievoRiuscito);
+    }
+
+    @Test
+    void testPrelevaConSaldoInsufficiente() {
+        boolean prelievoRiuscito = account.preleva(1500);
+        assertEquals(1000, account.getSaldo()); // Il saldo non cambia
+        assertEquals(false, prelievoRiuscito);
+    }
+}
+```
+
+In questo esempio, utilizziamo `@BeforeEach` per garantire che l'istanza dell'account `account` venga creata prima di ogni test. Questo assicura che ogni test parta da uno stato pulito e indipendente dagli altri test.
+
+I due metodi di test `testPrelevaConSaldoSufficiente` e `testPrelevaConSaldoInsufficiente` verificano il comportamento del metodo `preleva` dell'account in due situazioni diverse.
+
+Utilizzando `@BeforeEach`, è possibile garantire che i test siano ripetibili e non influiscano l'uno sull'altro a causa di dati condivisi.
+
+
+
+
+
+
+
+
 
 
 
