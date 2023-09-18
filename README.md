@@ -699,6 +699,60 @@ In questo esempio, abbiamo contrassegnato il parametro `@TempDir` del metodo di 
 All'interno del test, verifichiamo che la directory temporanea esista, creiamo un file temporaneo all'interno di essa, verifichiamo che il file sia stato creato e leggiamo il contenuto del file temporaneo. L'utilizzo di `@TempDir` semplifica la gestione delle directory temporanee nei tuoi test e rende il tuo codice più pulito e manutenibile.
 
 
+_______________________________________
+
+
+
+## Jmeter
+
+Introduzione a Apache JMeter: Misurare le Prestazioni e il Carico
+
+Apache JMeter è una potente e versatile applicazione open-source progettata per testare le prestazioni di applicazioni web e servizi, oltre a valutare la loro resistenza sotto stress. Questo strumento è ampiamente utilizzato nel mondo del software per condurre test di carico, test di stress, test di stabilità e altro ancora. In questa breve introduzione, esploreremo le funzionalità principali di JMeter e il suo ruolo cruciale nello sviluppo di applicazioni affidabili e performanti.
+
+Cosa è Apache JMeter?
+
+Apache JMeter è un'applicazione scritta in Java che consente agli sviluppatori e ai tester di simulare comportamenti utente in un'applicazione o su un sito web, al fine di valutarne le prestazioni e la scalabilità. Con JMeter, è possibile creare scenari di test complessi che simulano il comportamento di migliaia di utenti simultanei, analizzando come l'applicazione risponde a varie condizioni di carico.
+
+Caratteristiche Principali di JMeter
+
+    Test di Carico: JMeter permette di creare test di carico per verificare quanto un'applicazione può sopportare in termini di traffico utente simultaneo. Questo aiuta a identificare i punti critici di debolezza e a pianificare miglioramenti.
+
+    Test di Stress: È possibile eseguire test di stress per valutare come l'applicazione si comporta quando esposta a condizioni al limite, come un alto carico di richieste o risorse limitate.
+
+    Monitoraggio delle Prestazioni in Tempo Reale: JMeter offre strumenti per monitorare le prestazioni dell'applicazione durante i test, consentendo di identificare e risolvere tempestivamente problemi di prestazioni.
+
+    Test di Automazione: JMeter supporta l'automazione dei test, consentendo di eseguirli in modo ripetitivo durante lo sviluppo e l'implementazione dell'applicazione.
+
+    Diversi Tipi di Test: È possibile eseguire test su protocolli diversi, come HTTP, FTP, JDBC e molti altri. Questo lo rende adatto per una vasta gamma di applicazioni e servizi.
+
+Come Funziona JMeter?
+
+JMeter utilizza un'interfaccia basata su GUI per la creazione e la configurazione dei test. Gli utenti possono definire scenari di test dettagliati, compresi i passi delle richieste HTTP, i tempi di attesa e i dati da inviare. Una volta configurato il test, JMeter genera un carico di richieste sull'applicazione in base alle specifiche fornite, raccogliendo dati di prestazione e generando report dettagliati.
+
+
+Apache JMeter è uno strumento essenziale per garantire che le applicazioni e i servizi web siano affidabili e performanti. I test di prestazioni eseguiti con JMeter aiutano a identificare i problemi in modo proattivo, consentendo agli sviluppatori di apportare miglioramenti e garantire un'esperienza utente ottimale. Grazie alla sua flessibilità e alla vasta comunità di supporto, JMeter è una risorsa preziosa per chiunque lavori nello sviluppo e nel test delle applicazioni.
+
+
+https://jmeter.apache.org/download_jmeter.cgi
+
+
+1-scaricare il file zip
+2-scompattare il file zip
+3-per windows nella cartella bin selezionare jmeter.bat
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
