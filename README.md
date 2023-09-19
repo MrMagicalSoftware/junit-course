@@ -737,8 +737,12 @@ https://jmeter.apache.org/download_jmeter.cgi
 
 
 1-scaricare il file zip
+
 2-scompattare il file zip
+
 3-per windows nella cartella bin selezionare jmeter.bat
+
+4-linux mac  nella cartella bin sh jmeter.sh
 
 
 
