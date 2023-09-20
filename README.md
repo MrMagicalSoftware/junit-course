@@ -91,7 +91,6 @@ _______________________________________________________
 | @Tag|Used to declare tags for filtering tests, either at the class or method level; analogous to test groups in TestNG or Categories in JUnit 4. Such annotations are inherited at the class level but not at the method level.|
 | @Disabled |Used to disable a test class or test method; analogous to JUnit 4’s @Ignore. Such annotations are not inherited.|
 | @Timeout |Used to fail a test, test factory, test template, or lifecycle method if its execution exceeds a given duration. Such annotations are inherited.|
-| @Timeout |Used to fail a test, test factory, test template, or lifecycle method if its execution exceeds a given duration. Such annotations are inherited.
 | @ExtendWith |Used to register extensions declaratively. Such annotations are inherited.|
 | @RegisterExtension |Used to register extensions programmatically via fields. Such fields are inherited unless they are shadowed.|
 | @TempDir|Used to supply a temporary directory via field injection or parameter injection in a lifecycle method or test method; located in the org.junit.jupiter.api.io package.|
